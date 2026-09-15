@@ -5,7 +5,8 @@ Every identity field is a placeholder until the operator fills it in, which is
 deliberate -- but a placeholder that reaches a public registry is permanent and
 embarrassing, so this exits non-zero while any remain.
 
-    python3 scripts/check_release.py
+    python3 scripts/check_release.py            # is everything filled in?
+    python3 scripts/check_release.py v0.1.0    # ...and does it match this release?
 """
 import json
 import os
@@ -66,6 +67,34 @@ def main():
         if not os.path.exists(os.path.join(ROOT, name)):
             problems.append("%s is missing" % name)
 
+    # Three files declare a version. They drift silently, and a registry will
+    # happily accept an extension whose version disagrees with the tag that
+    # published it -- after which the two are permanently confusing.
+    declared = {}
+    for name, key in ((".claude-plugin/plugin.json", "version"),
+                      ("extension/package.json", "version")):
+        path = os.path.join(ROOT, name)
+        if os.path.exists(path):
+            with open(path) as fh:
+                declared[name] = json.load(fh).get(key)
+    market = os.path.join(ROOT, ".claude-plugin", "marketplace.json")
+    if os.path.exists(market):
+        with open(market) as fh:
+            plugins = json.load(fh).get("plugins") or []
+        if plugins:
+            declared[".claude-plugin/marketplace.json"] = plugins[0].get("version")
+
+    if len(set(declared.values())) > 1:
+        problems.append("versions disagree: %s"
+                        % ", ".join("%s=%s" % kv for kv in sorted(declared.items())))
+
+    expected = sys.argv[1].lstrip("v") if len(sys.argv) > 1 else None
+    if expected:
+        for name, version in sorted(declared.items()):
+            if version != expected:
+                problems.append("%s declares %s but the release is %s"
+                                % (name, version, expected))
+
     if problems:
         sys.stderr.write("Not ready to publish:\n")
         for problem in problems:
@@ -73,7 +102,8 @@ def main():
         sys.stderr.write("\nFill these in, then run this again.\n")
         return 1
 
-    sys.stdout.write("Ready to publish.\n")
+    sys.stdout.write("Ready to publish%s.\n"
+                     % (" as %s" % expected if expected else ""))
     return 0
 
 

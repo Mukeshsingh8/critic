@@ -31,6 +31,46 @@ Two things worth deciding before you type them:
 
 ---
 
+## Releasing an update
+
+The two halves ship differently, and this is the part that surprises people.
+
+**The plugin ships on push.** This repository *is* its distribution — there is no
+registry and no publish step. Once `main` moves, users pick it up with:
+
+```bash
+claude plugin marketplace update
+claude plugin update cca      # restart Claude Code to apply
+```
+
+**The extension does not.** Open VSX and the VS Code Marketplace need an explicit
+publish, and both refuse a version they already hold. So a push updates the plugin
+and silently leaves the extension behind unless you tag.
+
+Tagging does everything, via `.github/workflows/publish.yml`:
+
+```bash
+# bump the version in all three manifests first:
+#   .claude-plugin/plugin.json, .claude-plugin/marketplace.json, extension/package.json
+python3 scripts/check_release.py v0.2.0     # refuses if they disagree
+git commit -am "0.2.0" && git push
+git tag -a v0.2.0 -m "0.2.0" && git push origin v0.2.0
+```
+
+The workflow then verifies the tag matches every manifest, runs both suites, builds
+the `.vsix`, publishes to whichever registries have a token configured, and attaches
+the `.vsix` to a GitHub release. A registry with no secret set is skipped rather than
+failing the run, so you can add one at a time.
+
+### Secrets to add
+
+At <https://github.com/Mukeshsingh8/critic/settings/secrets/actions>:
+
+| Secret | Where it comes from |
+|---|---|
+| `OVSX_PAT` | <https://open-vsx.org/user-settings/tokens> |
+| `VSCE_PAT` | Azure DevOps personal access token, Marketplace → Manage, **All accessible organizations** |
+
 ## Where this lives
 
 GitHub is home; GitLab is a mirror. Push both:

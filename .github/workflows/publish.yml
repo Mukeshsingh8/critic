@@ -1,0 +1,55 @@
+name: publish
+
+# Pushing code already updates the plugin, because this repository *is* the
+# plugin's distribution. The extension is different: the registries need an
+# explicit publish and reject a version they already hold. Tagging ships it.
+#
+#   python3 scripts/check_release.py v0.2.0   # locally, before you tag
+#   git tag -a v0.2.0 -m "..." && git push origin v0.2.0
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    # Declared at job level on purpose: a step-level `if` cannot read a
+    # step-level `env`, so checking these to skip a registry only works here.
+    env:
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"     # the floor the plugin supports
+
+      - name: Manifests must agree with the tag
+        run: python3 scripts/check_release.py "${GITHUB_REF_NAME}"
+
+      - name: Nothing broken gets published
+        run: |
+          python3 -m unittest discover tests
+          npm --prefix extension ci
+          npm --prefix extension test
+
+      - name: Build the vsix
+        run: npm --prefix extension run package
+
+      - name: Publish to Open VSX
+        if: env.OVSX_PAT != ''
+        run: npx ovsx publish extension/cca-arbiter-*.vsix -p "$OVSX_PAT"
+
+      - name: Publish to the VS Code Marketplace
+        if: env.VSCE_PAT != ''
+        run: npx @vscode/vsce publish --no-dependencies --packagePath extension/cca-arbiter-*.vsix
+
+      - name: Attach the vsix to the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: extension/cca-arbiter-*.vsix
+          generate_release_notes: true
