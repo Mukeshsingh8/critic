@@ -1,0 +1,104 @@
+{
+  "name": "cca-arbiter",
+  "displayName": "CCA Arbiter",
+  "description": "Arbitrate CCA critic blocks and phase commits without leaving the editor",
+  "version": "0.1.0",
+  "license": "MIT",
+  "publisher": "your-publisher-id",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:.cca"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "cca.openDashboard",
+        "title": "CCA: Open Dashboard"
+      },
+      {
+        "command": "cca.overrule",
+        "title": "CCA: Overrule this finding",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "cca.wontfix",
+        "title": "CCA: Mark wontfix",
+        "icon": "$(check)"
+      },
+      {
+        "command": "cca.openFinding",
+        "title": "CCA: Open finding"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "ccaFeedback",
+          "name": "CCA Critic Feedback"
+        }
+      ]
+    },
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "cca.overrule",
+          "when": "view == ccaFeedback && viewItem == ccaOpen",
+          "group": "inline"
+        },
+        {
+          "command": "cca.wontfix",
+          "when": "view == ccaFeedback && viewItem == ccaOpen",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "npm run sync:dashboard && esbuild src/extension.ts --bundle --platform=node --target=node18 --format=cjs --external:vscode --outfile=dist/extension.js",
+    "watch": "npm run build -- --sourcemap --watch",
+    "vscode:prepublish": "npm run build -- --minify",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run && npm run typecheck",
+    "package": "vsce package --no-dependencies",
+    "sync:dashboard": "node -e \"const fs=require('fs');fs.mkdirSync('media',{recursive:true});for(const f of ['dashboard.css','dashboard.js'])fs.copyFileSync('../dashboard/'+f,'media/'+f);console.log('media/ synced from dashboard/')\"",
+    "publish:vsce": "vsce publish --no-dependencies",
+    "publish:ovsx": "ovsx publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.0",
+    "esbuild": "^0.28.0",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.0",
+    "ovsx": "^0.10.0"
+  },
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/mukesh886singh/critic.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/mukesh886singh/critic/-/issues"
+  },
+  "homepage": "https://gitlab.com/mukesh886singh/critic#readme",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "code-review",
+    "critic",
+    "ai",
+    "review"
+  ],
+  "galleryBanner": {
+    "color": "#0d1b3e",
+    "theme": "dark"
+  }
+}

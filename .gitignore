@@ -1,0 +1,26 @@
+# Runtime state, per-project and never shared
+.cca/
+CF.md
+
+# Eval output
+test-project/eval-results.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Node / the extension. Matched at any depth on purpose: vitest writes a cache
+# to whichever directory it is run from, which put a node_modules at the
+# repository root and very nearly published it.
+node_modules/
+dist/
+*.vsix
+.vite/
+
+# Personal research note: carries commentary about the author's employer and
+# was never product documentation. Kept locally, never published.
+cca-ensemble-claude-code-plan.md
+
+# Subagent scratch
+**/.claude/agent-memory/
+.claude/worktrees/

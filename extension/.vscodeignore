@@ -1,0 +1,10 @@
+.vscode/**
+test/**
+src/**
+node_modules/**
+tsconfig.json
+vitest.config.ts
+**/*.map
+!LICENSE
+!CHANGELOG.md
+!icon.png

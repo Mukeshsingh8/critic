@@ -1,0 +1,30 @@
+{
+  "name": "cca",
+  "description": "Coder / Critic / Arbiter for Claude Code",
+  "owner": {
+    "name": "Mukesh Singh",
+    "email": "31826693-mukesh886singh@users.noreply.gitlab.com",
+    "url": "https://gitlab.com/mukesh886singh/critic"
+  },
+  "plugins": [
+    {
+      "name": "cca",
+      "source": "./",
+      "description": "Every edit reviewed as it happens by two fresh Claude critics on different models, with a human arbiter; plus a phase gate that forces a large plan to ship as small, individually committed increments.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "keywords": [
+        "review",
+        "critic",
+        "ensemble",
+        "hooks",
+        "phase-gate"
+      ],
+      "author": {
+        "name": "Mukesh Singh",
+        "email": "31826693-mukesh886singh@users.noreply.gitlab.com"
+      },
+      "homepage": "https://gitlab.com/mukesh886singh/critic#readme"
+    }
+  ]
+}

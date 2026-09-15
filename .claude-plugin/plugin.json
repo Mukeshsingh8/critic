@@ -1,0 +1,19 @@
+{
+  "name": "cca",
+  "description": "Coder / Critic / Arbiter \u2014 every edit reviewed by two fresh Claude critics on different models, with a human arbiter",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "review",
+    "critic",
+    "ensemble",
+    "hooks"
+  ],
+  "author": {
+    "name": "Mukesh Singh",
+    "email": "31826693-mukesh886singh@users.noreply.gitlab.com",
+    "url": "https://gitlab.com/mukesh886singh/critic"
+  },
+  "homepage": "https://gitlab.com/mukesh886singh/critic#readme",
+  "repository": "https://gitlab.com/mukesh886singh/critic"
+}
