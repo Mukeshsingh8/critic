@@ -31,7 +31,7 @@ there is no way to have it cheaply: the reviews are the product.
 ## Install
 
 ```
-/plugin marketplace add https://gitlab.com/mukesh886singh/critic
+/plugin marketplace add Mukeshsingh8/critic
 /plugin install cca@cca
 ```
 

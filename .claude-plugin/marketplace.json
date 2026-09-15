@@ -3,8 +3,8 @@
   "description": "Coder / Critic / Arbiter for Claude Code",
   "owner": {
     "name": "Mukesh Singh",
-    "email": "31826693-mukesh886singh@users.noreply.gitlab.com",
-    "url": "https://gitlab.com/mukesh886singh/critic"
+    "email": "65760067+Mukeshsingh8@users.noreply.github.com",
+    "url": "https://github.com/Mukeshsingh8/critic"
   },
   "plugins": [
     {
@@ -22,9 +22,9 @@
       ],
       "author": {
         "name": "Mukesh Singh",
-        "email": "31826693-mukesh886singh@users.noreply.gitlab.com"
+        "email": "65760067+Mukeshsingh8@users.noreply.github.com"
       },
-      "homepage": "https://gitlab.com/mukesh886singh/critic#readme"
+      "homepage": "https://github.com/Mukeshsingh8/critic#readme"
     }
   ]
 }

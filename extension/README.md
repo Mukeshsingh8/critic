@@ -27,7 +27,7 @@ This extension does nothing on its own. It is the editor surface for the **CCA p
 Code**, and needs that installed first:
 
 ```
-/plugin marketplace add https://gitlab.com/mukesh886singh/critic
+/plugin marketplace add Mukeshsingh8/critic
 /plugin install cca@cca
 ```
 

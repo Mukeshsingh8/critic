@@ -15,7 +15,7 @@ any remain, because a placeholder that reaches a public registry is permanent.
 |---|---|---|
 | `mukesh886singh` | both manifests, both READMEs | your GitHub username |
 | `Mukesh Singh` | `plugin.json`, `marketplace.json` | the name you want published |
-| `31826693-mukesh886singh@users.noreply.gitlab.com` | `plugin.json`, `marketplace.json` | a **personal** address, or `<id>+<user>@users.noreply.github.com` |
+| `65760067+Mukeshsingh8@users.noreply.github.com` | `plugin.json`, `marketplace.json` | a **personal** address, or `<id>+<user>@users.noreply.github.com` |
 | `Mukesh Singh` | `LICENSE`, `extension/LICENSE` | the copyright holder |
 | `__PUBLISHER_ID__` | `extension/package.json` | your registered Marketplace / Open VSX publisher id |
 
@@ -31,6 +31,15 @@ Two things worth deciding before you type them:
   blocker, but it is much cheaper to answer now than after it is public.
 
 ---
+
+## Where this lives
+
+GitHub is home; GitLab is a mirror. Push both:
+
+```bash
+git push origin main      # GitHub
+git push gitlab main      # mirror
+```
 
 ## 1. The plugin — GitHub, no registry
 

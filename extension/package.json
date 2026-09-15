@@ -83,12 +83,12 @@
   "icon": "icon.png",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/mukesh886singh/critic.git"
+    "url": "https://github.com/Mukeshsingh8/critic.git"
   },
   "bugs": {
-    "url": "https://gitlab.com/mukesh886singh/critic/-/issues"
+    "url": "https://github.com/Mukeshsingh8/critic/issues"
   },
-  "homepage": "https://gitlab.com/mukesh886singh/critic#readme",
+  "homepage": "https://github.com/Mukeshsingh8/critic#readme",
   "keywords": [
     "claude",
     "claude-code",
