@@ -17,7 +17,6 @@ any remain, because a placeholder that reaches a public registry is permanent.
 | `Mukesh Singh` | `plugin.json`, `marketplace.json` | the name you want published |
 | `65760067+Mukeshsingh8@users.noreply.github.com` | `plugin.json`, `marketplace.json` | a **personal** address, or `<id>+<user>@users.noreply.github.com` |
 | `Mukesh Singh` | `LICENSE`, `extension/LICENSE` | the copyright holder |
-| `__PUBLISHER_ID__` | `extension/package.json` | your registered Marketplace / Open VSX publisher id |
 
 ```bash
 python3 scripts/check_release.py     # lists whatever is still outstanding
@@ -87,7 +86,7 @@ to strangers is a different proposition from running it yourself.
 
 ```bash
 npm --prefix extension install
-npx ovsx create-namespace <__PUBLISHER_ID__> -p <token>
+npx ovsx create-namespace critic -p <token>   # already created
 npm --prefix extension run package
 npx ovsx publish extension/cca-arbiter-0.1.0.vsix -p <token>
 ```
@@ -99,7 +98,7 @@ npx ovsx publish extension/cca-arbiter-0.1.0.vsix -p <token>
 3. Create the publisher at <https://marketplace.visualstudio.com/manage>.
 
 ```bash
-npx vsce login <__PUBLISHER_ID__>
+npx vsce login critic
 npm --prefix extension run publish:vsce
 ```
 

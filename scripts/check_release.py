@@ -19,7 +19,9 @@ PLACEHOLDER = re.compile(r"__[A-Z_]+__")
 # to be a legal identifier -- which means it cannot be caught by the pattern
 # above and has to be named here instead.
 LITERALS = {
-    "extension/package.json": ["your-publisher-id"],
+    # Nothing outstanding. Add a literal here if a placeholder is ever
+    # introduced that has to stay syntactically valid (as the publisher id did,
+    # because vsce validates it before anything else runs).
 }
 
 FILES = [

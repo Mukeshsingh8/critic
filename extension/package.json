@@ -4,7 +4,7 @@
   "description": "Arbitrate CCA critic blocks and phase commits without leaving the editor",
   "version": "0.1.0",
   "license": "MIT",
-  "publisher": "your-publisher-id",
+  "publisher": "critic",
   "engines": {
     "vscode": "^1.85.0"
   },
