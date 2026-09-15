@@ -14,6 +14,11 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # The tokens live as ENVIRONMENT secrets on an environment named "critic",
+    # not as repository secrets. Without this line they resolve to empty
+    # strings and both publish steps skip silently -- a green run that shipped
+    # nothing, which is the worst kind of failure.
+    environment: critic
     # Declared at job level on purpose: a step-level `if` cannot read a
     # step-level `env`, so checking these to skip a registry only works here.
     env:

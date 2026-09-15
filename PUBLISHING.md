@@ -64,12 +64,20 @@ failing the run, so you can add one at a time.
 
 ### Secrets to add
 
-At <https://github.com/Mukeshsingh8/critic/settings/secrets/actions>:
+These are **environment** secrets on an environment named `critic`, which is why
+the publish job declares `environment: critic`. Stored as repository secrets
+instead, they would still work, but only if that line is removed — a mismatch
+resolves them to empty strings and the publish steps skip without failing.
+
+Manage them at <https://github.com/Mukeshsingh8/critic/settings/environments>:
 
 | Secret | Where it comes from |
 |---|---|
 | `OVSX_PAT` | <https://open-vsx.org/user-settings/tokens> |
 | `VSCE_PAT` | Azure DevOps personal access token, Marketplace → Manage, **All accessible organizations** |
+
+The environment is also where to put a required reviewer or a wait timer if you
+ever want a human gate before a release is pushed to the registries.
 
 ## Where this lives
 
